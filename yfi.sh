@@ -16,12 +16,20 @@
 #along with this program; if not, write to the Free Software
 #Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-clear
+if [[ "$1" ]]; then
 
-echo "Welcome to YFI: Youtube Freedom Improver"
+  yturl=$1
 
-echo "Paste Youtube URL here"
-read yturl
+else
+
+  clear
+
+  echo "Welcome to YFI: Youtube Freedom Improver"
+
+  echo "Paste Youtube URL here"
+  read yturl
+
+fi
 
 #echo entered url into tmp file
 
