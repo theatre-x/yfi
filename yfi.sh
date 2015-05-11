@@ -36,10 +36,11 @@ sed -i 's/youtube/youtube-nocookie/g' /tmp/old_yturl.txt
 sed -i 's/watch//g' /tmp/old_yturl.txt
 sed -i 's/\?//g' /tmp/old_yturl.txt
 sed -i 's/v=/embed\//g' /tmp/old_yturl.txt
+sed -i 's/http:/https:/g' /tmp/old_yturl.txt
 
 # Display new url
 
-cat /tmp/old_yturl.txt
+echo `cat /tmp/old_yturl.txt`"?html5=1"
 
 # rm tmp file
 
