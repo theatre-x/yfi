@@ -43,10 +43,30 @@ sed -i -e 's/^http:/https:/g' \
 -e 's/$/?html5=1/' \
 /tmp/old_yturl.txt
 
+select choice in \
+        "Open in default browser" \
+	"Open in VLC" \
+
+do
+case $choice in
+        "Open in default browser")
+        xdg-open `cat /tmp/old_yturl.txt`;
+        ;;
+        "Open in VLC")
+        vlc $1;
+        ;;
+        *)
+            echo "What do you want to do?";
+
+        esac
+done
+
+
 # Display new url
 cat /tmp/old_yturl.txt
 
 # rm tmp file
 rm /tmp/old_yturl.txt
+
 
 exit 0
