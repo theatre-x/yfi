@@ -18,7 +18,7 @@
 
 if [[ "$1" ]]; then
 
-  yturl=$1
+  yturl="${1}"
 
 else
 
@@ -32,24 +32,21 @@ else
 fi
 
 #echo entered url into tmp file
+echo "${yturl}" > /tmp/old_yturl.txt
 
-echo $yturl > /tmp/old_yturl.txt
-
-# Replace with nocookie
-
-sed -i 's/youtube/youtube-nocookie/g' /tmp/old_yturl.txt
-
-# Strip watch crap, echo into a tmp file
-
-sed -i 's/watch//g' /tmp/old_yturl.txt
-sed -i 's/\?//g' /tmp/old_yturl.txt
-sed -i 's/v=/embed\//g' /tmp/old_yturl.txt
-sed -i 's/http:/https:/g' /tmp/old_yturl.txt
+# Replace with nocookie. Strip watch crap.
+sed -i -e 's/^http:/https:/g' \
+-e 's/youtube\.com/youtube-nocookie\.com/g' \
+-e 's/watch//g' \
+-e 's/\?//g' \
+-e 's/v=/embed\//g' \
+-e 's/$/?html5=1/' \
+/tmp/old_yturl.txt
 
 # Display new url
-
-echo `cat /tmp/old_yturl.txt`"?html5=1"
+cat /tmp/old_yturl.txt
 
 # rm tmp file
-
 rm /tmp/old_yturl.txt
+
+exit 0
