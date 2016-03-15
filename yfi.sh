@@ -46,6 +46,7 @@ sed -i -e 's/^http:/https:/g' \
 select choice in \
         "Open in default browser" \
 	"Open in VLC" \
+	"Copy to Clipboard" \
 
 do
 case $choice in
@@ -55,7 +56,15 @@ case $choice in
         "Open in VLC")
         vlc $1;
         ;;
-        *)
+	"Copy to Clipboard")
+	cat /tmp/old_yturl.txt | xclip -selection c;
+	echo "the new URL"; 
+	tput setaf 6;
+	tput bold;
+	echo $(cat /tmp/old_yturl.txt); 
+	tput sgr0;
+	echo "has been copied to your clipboard";
+#        *)
             echo "What do you want to do?";
 
         esac
